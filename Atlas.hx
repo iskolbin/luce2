@@ -1,4 +1,4 @@
-package ;
+package luce2;
 
 import haxe.ds.Vector;
 

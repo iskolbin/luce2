@@ -24,6 +24,7 @@ class Widget implements Tween.Tweenable {
 	public var children(default,null): Array<Widget> = null;
 	public var chunk(default,null): Batch.BatchDrawChunk;
 	public var shift(default,null): Int;
+	public var reserved(default,null): Int;
 	public var frame(default,set): Float = 0;
 	public var framesList(default,null): Array<Float> = NULL_FRAMES;
 	public var color(default,null): Color;
@@ -67,9 +68,10 @@ class Widget implements Tween.Tweenable {
 		return v;
 	}
 
-	public function new( chunk: Batch.BatchDrawChunk, shift: Int ) {
+	public function new( chunk: Batch.BatchDrawChunk, shift: Int, reserved: Int ) {
 		this.chunk = chunk;
 	 	this.shift = shift;
+		this.reserved = reserved;
 		color = new Color( chunk, shift );
 		transform = new Transform2D( chunk, shift );
 	}

@@ -1,4 +1,4 @@
-package ;
+package luce2;
 
 import haxe.ds.Vector;
 
@@ -10,9 +10,9 @@ class BatchDrawChunk {
 		this.atlasId = atlasId;
 	}
 
-	public inline function add() {
+	public inline function add( count: Int ) {
 		var shift = renderList.length;
-		for ( i in 0...Batch.WGT_SIZE ) {
+		for ( i in 0...Batch.WGT_SIZE*count ) {
 			renderList.push( 0.0 );
 		}
 		return shift;
@@ -46,7 +46,7 @@ class BatchLayer {
 	public function new() {
 	}
 
-	public function add( atlasId: Int ) {
+	public function add( atlasId: Int, count: Int ) {
 		var chunk = null;
 		for ( c in chunks ) {
 			if ( c.atlasId == atlasId ) {
@@ -60,7 +60,7 @@ class BatchLayer {
 			chunks.push( chunk );
 		}
 
-		return chunk.add();
+		return chunk.add( count );
 	}
 }
 
@@ -80,8 +80,8 @@ class Batch {
 		}
 	}
 	
-	public function add( atlasId: Int, layerId: Int ) {
-		return layers[layerId].add( atlasId );
+	public function add( atlasId: Int, layerId: Int, count: Int {
+		return layers[layerId].add( atlasId, count );
 	}
 
 	public function render() {
